@@ -1,0 +1,23 @@
+#This is multi play yaml file
+- name: PLAY-1
+  hosts: localhost
+  tasks:
+  - name:  Play-1 and TASK-1
+    ansible.builtin.debug:
+      msg: "Hello I am from Play-1 and TASK-1"
+
+- name: PlAy-2
+  hosts: localhost
+  tasks:
+  - name: Play-2 and Task -1
+    ansible.builtin.debug:
+      msg: "Hello I am from play-2 and task-2"
+
+- name: PLAY-3
+  hosts: localhost
+  tasks:
+  - name: PLAY-3 and TASK-1
+    ansible.builtin.debug:
+      msg: "Hello I am from plya-3 and task-3"
+
+      

@@ -1,0 +1,12 @@
+#varible of this files
+- name: varibles
+  hosts: localhost
+  vars: #varible declarartion
+    Course: "AwsDevOps"
+    Duration: "130HRS"
+    Trainer: "Shiva"
+  tasks:
+  - name: print information
+    ansible.builtin.debug:
+      msg: "Hi, We are learning {{Course}} from {{Trainer}}, Duration is {{Duration}}."
+      
