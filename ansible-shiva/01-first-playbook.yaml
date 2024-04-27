@@ -1,0 +1,8 @@
+#This is first ansible playbook
+- name : PLAY-1
+  hosts: localhost
+  tasks:
+  - name: PLAY-1 and TASK-1
+    ansible.builtin.debug:
+      msg: "Hello from PLAY-1 and TASK-1"
+      
