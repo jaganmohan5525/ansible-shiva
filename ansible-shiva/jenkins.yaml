@@ -1,0 +1,67 @@
+pipeline {
+    agent{
+        node{
+            label 'AGENT-1'
+        }
+    }
+    environment{
+        GREETING = 'Hello Jenkins'
+    }
+    options{
+        timeout(time: 1, unit: 'HOURS')
+        disableConcurrentBuilds()
+    }
+    parametrs{
+        string(name: 'PERSON', defaultValue: 'Mr Jenkins', description: 'who should i say helllo to?')
+
+        text(name: 'BIOGRAPHY', defaultValue: '', description: 'Enter some information about the person')
+
+        booleanPARAM(name: 'TOGGLE', defaultValue: true, description: 'Toggle this value')
+
+        choice(name: 'CHOICE', choices: ['One', 'Two', 'Three'], description: 'Pick something')
+        //build
+
+        stages {
+            stage('Build') {
+                steps {
+                    echo 'Building...'
+                }
+            }
+            stage('test') {
+                steps {
+                    echo 'Testing...'
+                }
+            }
+            stage('Deploy') {
+                steps {
+                    sh """
+                        echo "here i wrote shell script"
+                        echo "$GREETING"
+                        #sleep 10
+                    """
+                }
+            }
+            stage('check params') {
+                steps{
+                    sh """
+                        echo "Hello ${params.PERSON}"
+                        echo "Biography: ${params.BIOGRAPHY}
+                    """
+                }
+            }
+        }
+            //post build
+        post {
+            always {
+                echo 'I will alwsys say Hello again!'
+            }
+            failure {
+                echo 'this runs when Pipeline is failed, used generally to send some alerts'
+            }
+            success {
+                echo 'I will say hello when pipeline is success.'
+            }
+            
+        }
+    }
+}
